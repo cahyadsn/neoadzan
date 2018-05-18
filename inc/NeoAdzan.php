@@ -6,7 +6,7 @@ filename : NeoAdzan.php
 package  : /cahyadsn/neoadzan
 purpose  :
 create   : 2018/05/08
-last edit: 2018/05/16
+last edit: 2018/05/19
 author   : cahya dsn
 ================================================================================
 This program is free software; you can redistribute it and/or modify it under the
@@ -130,7 +130,6 @@ class NeoAdzan extends Adzan
 			$hari=date('w',$date);
 			$day = date('d F Y', $date);
 			$day2= "{$i} {$this->nama_bulan_masehi[$month]} {$year}";
-			$hijri= $this->fromGregorianToHijri($date);
 			$jadwal[$i]['tgl']=$day2;
 			$jadwal[$i]['shubuh']=$times[1];
 			$jadwal[$i]['dhuhur']=$times[4];
@@ -169,7 +168,6 @@ class NeoAdzan extends Adzan
 			$hari=date('w',$date);
 			$day = date('d F Y', $date);
 			$day2= "{$i} {$this->nama_bulan_masehi[$month]} {$year}";
-			$hijri= $this->fromGregorianToHijri($date);
 			$jadwal[$i]['shubuh']=$times[1];
 			$jadwal[$i]['dhuhur']=$times[4];
 			$jadwal[$i]['ashar']=$times[5];
