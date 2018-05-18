@@ -130,7 +130,7 @@ class NeoAdzan extends Adzan
 			$hari=date('w',$date);
 			$day = date('d F Y', $date);
 			$day2= "{$i} {$this->nama_bulan_masehi[$month]} {$year}";
-			$hijri= $this->fromGregorianToHijri($date);
+			//$hijri= $this->fromGregorianToHijri($date);
 			$jadwal[$i]['tgl']=$day2;
 			$jadwal[$i]['shubuh']=$times[1];
 			$jadwal[$i]['dhuhur']=$times[4];
@@ -169,7 +169,7 @@ class NeoAdzan extends Adzan
 			$hari=date('w',$date);
 			$day = date('d F Y', $date);
 			$day2= "{$i} {$this->nama_bulan_masehi[$month]} {$year}";
-			$hijri= $this->fromGregorianToHijri($date);
+			//$hijri= $this->fromGregorianToHijri($date);
 			$jadwal[$i]['shubuh']=$times[1];
 			$jadwal[$i]['dhuhur']=$times[4];
 			$jadwal[$i]['ashar']=$times[5];
