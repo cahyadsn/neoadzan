@@ -106,7 +106,7 @@ class NeoAdzan extends Adzan
 			$hari=date('w',$date);
 			$day = date('d F Y', $date);
 			$day2= "{$i} {$this->nama_bulan_masehi[$month]} {$year}";
-			$result.="<tr class='w3-theme-l".($i%2==0?'5':'4')."'>";
+			$result.="<tr class='".(date('Y-n-j')==$year.'-'.$month.'-'.$i?"w3-theme-d1":"w3-theme-l".($i%2==0?'5':'4'))."'>";
 			$result.="<td>{$day2}</td>";
 			foreach($times as $k=>$t){
 				$result.=(!in_array($k,array(2,3,6))?"<td".($k==0?" class='w3-hide-small'":"").">{$t}</td>":"");
