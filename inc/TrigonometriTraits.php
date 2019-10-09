@@ -71,4 +71,11 @@ trait TrigonometriTraits
         return rad2deg(atan(1/$x));
     }
 
+    // range reduce angle in degrees.
+    function fixangle($a)
+    {
+        $a = $a - 360.0 * floor($a / 360.0);
+        $a = $a < 0 ? $a + 360.0 : $a;
+        return $a;
+    }
 }
