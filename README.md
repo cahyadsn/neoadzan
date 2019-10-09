@@ -14,8 +14,8 @@ NeoAdzan Islamic Prayer Time Schedule in PHP language. Build on PHP language and
 + MySQL (http://www.mysql.com/), 
 
 ## Donation
-+ [paypal] : (https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=K6YRM43CZ44UQ) cdsatrian@yahoo.co.id
-+ BCA : 1451332193
++ [paypal] : (https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=K6YRM43CZ44UQ) cdsatrian@yahoo.co.id | (https://paypal.me/cahyadsn) https://paypal.me/cahyadsn
++ BNI Syariah : 0821 342 555
 
 ## Contact
 + facebook (https://m.facebook.com/cahya.dsn)
