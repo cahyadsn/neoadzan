@@ -6,7 +6,7 @@ filename : Adzan.php
 package  : /cahyadsn/neoadzan
 purpose  :
 create   : 2018/05/08
-last edit: 2018/05/15
+last edit: 2019/10/09
 author   : cahya dsn
 ================================================================================
 This program is free software; you can redistribute it and/or modify it under the
@@ -17,13 +17,13 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY
 WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
 A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
-copyright (c) 2018 by cahya dsn; cahyadsn@gmail.com
+copyright (c) 2018-19 by cahya dsn; cahyadsn@gmail.com
 ================================================================================*/
 class Adzan
 {
 
-	use TimeTraits,
-		TrigonometriTraits;
+    use TimeTraits,
+        TrigonometriTraits;
     //------------------------ Constants --------------------------
     // Calculation Methods
     var $Custom     = 0;    // Custom Setting
@@ -34,7 +34,7 @@ class Adzan
     var $Makkah     = 5;    // Umm al-Qura, Makkah
     var $Egypt      = 6;    // Egyptian General Authority of Survey
     var $Tehran     = 7;    // Institute of Geophysics, University of Tehran
-	var $Depag		= 8;	// Departemen Agama RI
+    var $Depag      = 8;    // Departemen Agama RI
     // Juristic Methods
     var $Shafii     = 0;    // Shafii (standard)
     var $Hanafi     = 1;    // Hanafi
@@ -128,14 +128,14 @@ class Adzan
     {
 
         $this->methodParams[$this->Custom]    = array(1, 10, 0, 18, 1, 0, 0, 17);
-		$this->methodParams[$this->ISNA]      = array(1, 10, 0, 15, 1, 0, 0, 15);
+        $this->methodParams[$this->ISNA]      = array(1, 10, 0, 15, 1, 0, 0, 15);
         $this->methodParams[$this->Jafari]    = array(1, 10, 0, 16, 0, 4, 0, 14);
         $this->methodParams[$this->Karachi]   = array(1, 10, 0, 18, 1, 0, 0, 18);
         $this->methodParams[$this->MWL]       = array(1, 10, 0, 18, 1, 0, 0, 17);
         $this->methodParams[$this->Makkah]    = array(1, 10, 0, 18.5, 1, 0, 1, 90);
         $this->methodParams[$this->Egypt]     = array(1, 10, 0, 19.5, 1, 0, 0, 17.5);
         $this->methodParams[$this->Tehran]    = array(1, 10, 0, 17.7, 0, 4.5, 0, 14);
-		$this->methodParams[$this->Depag]  	  = array(1, 10, 0, 20, 1, 1, 0, 18);
+        $this->methodParams[$this->Depag]     = array(1, 10, 0, 20, 1, 1, 0, 18);
         $this->setCalcMethod($methodID);
     }
 
@@ -250,15 +250,14 @@ class Adzan
     function sunPosition($jd)
     {
         $D = $jd - 2451545.0;
-        $g = fmod((357.529 + 0.98560028* $D),360);
-        $q = fmod((280.459 + 0.98564736* $D),360);
-        $L = fmod(($q + 1.915* $this->dsin($g) + 0.020* $this->dsin(2*$g)),360);
+        $g = $this->fixangle(357.529 + 0.98560028* $D);
+        $q = $this->fixangle(280.459 + 0.98564736* $D);
+        $L = $this->fixangle($q + 1.915* $this->dsin($g) + 0.020* $this->dsin(2*$g));
         $R = 1.00014 - 0.01671* $this->dcos($g) - 0.00014* $this->dcos(2*$g);
         $e = 23.4397 - 0.00000036* $D;
         $dec = $this->darcsin($this->dsin($e)* $this->dsin($L));
         $RA = $this->darctan2($this->dcos($e)* $this->dsin($L), $this->dcos($L))/ 15;
-        $RA = fmod($RA,24.0);
-		//$dec=abs($dec);
+        $RA = $this->fixhour($RA);
         $EqT = $q/15 - $RA;
         return array($dec, $EqT);
     }
