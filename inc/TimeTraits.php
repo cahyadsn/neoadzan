@@ -6,7 +6,7 @@ filename : TimeTraits.php
 package  : /cahyadsn/neoadzan
 purpose  :
 create   : 2018/05/08
-last edit: 2018/05/08
+last edit: 2019/10/09
 author   : cahya dsn
 ================================================================================
 This program is free software; you can redistribute it and/or modify it under the
@@ -104,11 +104,20 @@ trait TimeTraits
         return $this->floatToTime12($time, true);
     }
 	
-	function dayDiff($date1,$date2)
-	{
-		$d1=new DateTime($date1);
-		$d2=new DateTime($date2);
-		$interval= $d1->diff($d2);
-		return $interval->format('%a');
-	}
+    function dayDiff($date1,$date2)
+    {
+         $d1=new DateTime($date1);
+         $d2=new DateTime($date2);
+         $interval= $d1->diff($d2);
+         return $interval->format('%a');
+    }
+
+    // range reduce hours to 0..23
+    function fixhour($a)
+    {
+        $a = $a - 24.0 * floor($a / 24.0);
+        $a = $a < 0 ? $a + 24.0 : $a;
+        return $a;
+    }
+	
 }
