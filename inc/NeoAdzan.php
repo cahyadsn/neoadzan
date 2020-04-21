@@ -6,7 +6,7 @@ filename : NeoAdzan.php
 package  : /cahyadsn/neoadzan
 purpose  :
 create   : 2018/05/08
-last edit: 2018/05/19
+last edit: 200421,180519
 author   : cahya dsn
 ================================================================================
 This program is free software; you can redistribute it and/or modify it under the
@@ -17,22 +17,26 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY
 WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
 A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
-copyright (c) 2018 by cahya dsn; cahyadsn@gmail.com
+copyright (c) 2018-2020 by cahya dsn; cahyadsn@gmail.com
 ================================================================================*/
 include "TimeTraits.php";
 include "TrigonometriTraits.php";
+include "HijriTraits.php";
 include "Adzan.php";
 
 class NeoAdzan extends Adzan
 {
-	
+    use HijriTraits;
+    
+    var $nama_bulan_hijriah=array("DZUL HIJJAH","MUHARRAM","SHAFAR","RABI'UL AWAL","RABI'UL AKHIR","JUMADIL AWAL","JUMADIL AKHIR","RAJAB","SYA'BAN","RAMADHAN","SYAWWAL","DZUL QA'DAH","DZUL HIJJAH");
+
 	var $nama_bulan_masehi=array("Desember","Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember");
 	var $add=0;
-	
+
 	var $tgl_masehi;
 	var $bln_masehi;
 	var $thn_masehi;
-	
+
 	var $tgl_hijriah;
 	var $thn_hijriah;
 	var $bln_hijriah;
@@ -45,7 +49,7 @@ class NeoAdzan extends Adzan
 	var $dhc;
 	var $UB;
 	var $nextMonth;
-	
+
 	var $lat;
 	var $lng;
 	var $elev;
@@ -53,10 +57,10 @@ class NeoAdzan extends Adzan
 	var $imkan_rukyat;
 	var $periode;
 	var $rentang;
-	
+
 	var $qiblaDirection;
 	var $qiblaDistance;
-	
+
 	function __construct($methodID = 8)
 	{
 		parent::__construct($methodID);
@@ -67,31 +71,59 @@ class NeoAdzan extends Adzan
 		$this->lng=isset($_POST['lng'])?$_POST['lng']:106.820497;
 		$this->elev=isset($_POST['h'])?$_POST['h']:10;
 	}
-	
+
 	public function setLatLng($lat,$lng)
 	{
 		$this->lat=$lat;
 		$this->lng=$lng;
 	}
-	
+
 	public function setElevation($elev=0)
 	{
 		$this->elev=$elev;
 	}
-		
+
 	public function setTimeZone($TZ)
 	{
 		$this->TZ=$TZ;
 	}
-	
+
 	public function setMonthH($bln_hijriah=8)
 	{
 		$this->bln_hijriah=$bln_hijriah;
 	}
-	
-	public function setYearH($thn_hijriah=1439)
+
+	public function setYearH($thn_hijriah=1441)
 	{
 		$this->thn_hijriah=$thn_hijriah;
+	}
+    
+	public function checkDate($date,$before=false)
+	{
+		$h_date=$this->fromGregorianToHijri($date);
+		$this->tgl_hijriah=$h_date[1];
+		$m_before=$h_date[0];
+		$y_before=$h_date[2];
+		if($before){
+			if($h_date[0]-1==0){
+				$m_before=12;
+				$y_before=$h_date[2]-1;
+			}else{
+				$m_before=$h_date[0]-1;
+				$y_before=$h_date[2];
+			}
+		}
+		$this->setYearH($y_before);
+		$this->setMonthH($m_before);
+		return array(
+			date('Y',$this->nextMonth),
+			date('n',$this->nextMonth),
+			date('j',$this->nextMonth),
+			$this->thn_hijriah,
+			$this->bln_hijriah,
+			$this->tgl_hijriah,
+			$this->add
+		);
 	}
 
 	public function getSchedule($year='',$month=''){
@@ -100,14 +132,27 @@ class NeoAdzan extends Adzan
 		if(empty($month)) $month=date('n');
 		$date=strtotime(date($year.'-'.$month.'-1'));
 		$end_of_day=date('t', $date);
+        $bdate=date('Y-m-t',strtotime($year.'-'.$month.'-1 - 1 day'));
+		$sd=strtotime($year.'-'.$month.'-1');
+		$sd=strtotime($bdate);
+		$edate=date('Y-m-t',strtotime($year.'-'.$month.'-28'));
+		$emonth=date('t',strtotime($year.'-'.$month.'-28'));
+		$ed=strtotime($edate);
+        $hijri= $this->fromGregorianToHijri($date);
+        $r_e= $this->fromGregorianToHijri($ed);
 		$this->periode=strtoupper($this->nama_bulan_masehi[$month])." {$year}";
+        $this->rentang="({$hijri[1]} {$this->nama_bulan_hijriah[$hijri[0]]} {$hijri[2]} s.d. "
+					.($r_e[1])." {$this->nama_bulan_hijriah[$r_e[0]]} {$r_e[2]} )";
 		for($i=1;$i<=$end_of_day;$i++){
 			$times = $this->getPrayerTimes($date, $this->lat, $this->lng, $this->TZ);
 			$hari=date('w',$date);
 			$day = date('d F Y', $date);
 			$day2= "{$i} {$this->nama_bulan_masehi[$month]} {$year}";
+			$hijri= $this->fromGregorianToHijri($date);
+			$ayamul_bidh=(in_array($hijri[1],array(13,14,15)) && $hijri[0]!=9 && $hijri[0]!=12);
 			$result.="<tr class='".(date('Y-n-j')==$year.'-'.$month.'-'.$i?"w3-theme-d1":"w3-theme-l".($i%2==0?'5':'4'))."'>";
 			$result.="<td>{$day2}</td>";
+            $result.="<td class='w3-hide-small'>".($ayamul_bidh?"*":"")."{$hijri[1]} ".ucwords(strtolower($this->nama_bulan_hijriah[$hijri[0]]))." {$hijri[2]}</td>";           
 			foreach($times as $k=>$t){
 				$result.=(!in_array($k,array(2,3,6))?"<td".($k==0?" class='w3-hide-small'":"").">{$t}</td>":"");
 			}

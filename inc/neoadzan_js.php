@@ -5,7 +5,7 @@ BISMILLAAHIRRAHMAANIRRAHIIM - In the Name of Allah, Most Gracious, Most Merciful
 filename : neoadzan_js.php
 purpose  :
 create   : 2018/05/08
-last edit: 2018/05/16
+last edit: 200421,180516
 author   : cahya dsn
 ================================================================================
 This program is free software; you can redistribute it and/or modify it under the
@@ -16,7 +16,7 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY
 WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
 A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
-copyright (c) 2018 by cahya dsn; cahyadsn@gmail.com
+copyright (c) 2018-2020 by cahya dsn; cahyadsn@gmail.com
 ================================================================================*/
 session_start();
 header("Content-type: text/javascript");
@@ -104,6 +104,7 @@ $(document).ready(function(){
 					//console.log(d);
 					$('#sch').html(d.data.sch);
 					$('#periode').html(d.data.periode);
+                    $('#rentang').html(d.data.rentang);
 				}
 				$('div#preload').hide();
 			}

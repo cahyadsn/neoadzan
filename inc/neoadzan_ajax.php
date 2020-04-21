@@ -5,7 +5,7 @@ BISMILLAAHIRRAHMAANIRRAHIIM - In the Name of Allah, Most Gracious, Most Merciful
 filename : neoadzan_ajax.php
 purpose  :
 create   : 2018/04/08
-last edit: 2018/04/08
+last edit: 200421,180408
 author   : cahya dsn
 ================================================================================
 This program is free software; you can redistribute it and/or modify it under the
@@ -16,7 +16,7 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY
 WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
 A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
-copyright (c) 202018 by cahya dsn; cahyadsn@gmail.com
+copyright (c) 2018-2020 by cahya dsn; cahyadsn@gmail.com
 ================================================================================*/
 include "db.php";
 include "NeoAdzan.php";
@@ -42,6 +42,7 @@ if (!empty($_POST['id'])){
 		'lng'=> $neoadzan->dms(abs($d->lng)).($d->lng>=0?' BT':' BB'),
 		'tz'=> ' '.($d->tz>=0?'+':'-').abs($d->tz),
 		'periode' => $neoadzan->periode,
+        'rentang' => $neoadzan->rentang,
 		'sch'=>$sch
 	);
     $r=array('status'=>true,'data'=>$data);
