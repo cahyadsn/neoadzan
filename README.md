@@ -20,7 +20,7 @@ NeoAdzan Islamic Prayer Time Schedule in PHP language. Build on PHP language and
 ## Contact
 + facebook (https://m.facebook.com/cahya.dsn)
 + email (cahyadsn@gmail.com)
-+ demo site    : (http://cahyadsn.phpindonesia.id/neoadzan)
++ demo site    : (http://neoadzan.cahyadsn.com) (http://cahyadsn.phpindonesia.id/neoadzan)
 + source code  : (https://github.com/cahyadsn/neoadzan)
 
 ## Notes
