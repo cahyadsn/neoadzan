@@ -5,7 +5,7 @@ BISMILLAAHIRRAHMAANIRRAHIIM - In the Name of Allah, Most Gracious, Most Merciful
 filename : index.php
 purpose  :
 create   : 2018/01/25
-last edit: 180516
+last edit: 200421,180516
 author   : cahya dsn
 ================================================================================
 This program is free software; you can redistribute it and/or modify it under the
@@ -16,7 +16,7 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY
 WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
 A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
-copyright (c) 2018 by cahya dsn; cahyadsn@gmail.com
+copyright (c) 2018-2020 by cahya dsn; cahyadsn@gmail.com
 ================================================================================*/
 session_start();
 $c=isset($_SESSION['c'])?$_SESSION['c']:(isset($_GET['c'])?$_GET['c']:'indigo');
@@ -30,7 +30,7 @@ $neoadzan=new NeoAdzan();
 $neoadzan->setLatLng(-6.17501,106.820497);
 $neoadzan->setTimeZone(7);
 $sch=$neoadzan->getSchedule(date('Y'),date('n'));
-$version='1.0';
+$version='1.0.2';
 $app_name='NeoAdzan!';
 /*header('Expires: '.date('r'));
 header('Cache-Control: no-store, no-cache, must-revalidate');
@@ -123,31 +123,32 @@ header('Pragma: no-cache');*/
 			<table class='w3-table'>
 				<thead>
 					<tr>
-						<th class="w3-theme-d3 c" colspan="7">
+						<th class="w3-theme-d3 c" colspan="8">
 							<h3>Jadwal Waktu Shalat</h3>
 						</th>
 					</tr>
 					<tr>
-						<th class="w3-theme-d2 c" colspan="7">
-							<span id='prev' class='w3-col s2 m2'>
+						<th class="w3-theme-d2 c" colspan="8">
+							<span id='prev' class='w3-col s2 m4'>
 								<div class="w3-btn-group">
 									<button class="w3-btn" id='prevYear' title='previous Year'><i class='fa fa-angle-double-left'></i></button>
 									<button class="w3-btn" id='prevMonth' title='previous Month'><i class='fa fa-angle-left'></i></button>
 								</div>
 							</span>
-							<span id='periode' class='w3-col s8 m8'><?php echo $neoadzan->periode;?></span>
-							<span id='next' class='w3-col s2 m2'>
+							<span id='periode' class='w3-col s8 m4'><?php echo $neoadzan->periode;?></span>
+							<span id='next' class='w3-col s2 m4'>
 								<div class="w3-btn-group">
 									<button class="w3-btn" id='nextMonth' title='next Month'><i class='fa fa-angle-right'></i></button>
 									<button class="w3-btn" id='nextYear' title='next Year'><i class='fa fa-angle-double-right'></i></button>
 								</div>
 							</span>
+                            <span id='rentang' class='w3-col'><?php echo $neoadzan->rentang;?></span>
 							<input type='hidden' id='m' value='<?php echo date('n');?>'>
 							<input type='hidden' id='y' value='<?php echo date('Y');?>'>
 						</th>
 					</tr>
 					<tr>
-						<th class="w3-theme-d1" colspan="7">
+						<th class="w3-theme-d1" colspan="8">
 							<b>
 							<span class="w3-col m6 c"><span class='skab'>Kota Adm. Jakarta Pusat,</span><span class='sprov'> Provinsi DKI Jakarta</span></span>
 							<span class="w3-col m6 c">
@@ -158,6 +159,7 @@ header('Pragma: no-cache');*/
 					</tr>
 					<tr class="w3-theme-l1">
 						<th>Tgl Masehi</th>
+                        <th>Tgl Hijriah</th>
 						<th class='w3-hide-small'>Imsak</th>
 						<th>Shubuh</th>
 						<th>Dhuhur</th>
