@@ -14,14 +14,13 @@ NeoAdzan Islamic Prayer Time Schedule in PHP language. Build on PHP language and
 + MySQL (http://www.mysql.com/), 
 
 ## Donation
-+ [paypal] : (https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=K6YRM43CZ44UQ) cdsatrian@yahoo.co.id | https://paypal.me/cahyadsn
 + BNI Syariah : 0821 342 555
 
 ## Contact
 + facebook (https://m.facebook.com/cahya.dsn)
 + email (cahyadsn@gmail.com)
-+ demo site    : (http://neoadzan.cahyadsn.com) (http://cahyadsn.phpindonesia.id/neoadzan)
++ demo site    : (http://neoadzan.cahyadsn.com) 
 + source code  : (https://github.com/cahyadsn/neoadzan)
 
 ## Notes
-+ This apps have db data dependencies on 'wilayah' application (http://cahyadsn.phpindonesia.id/wilayah) source code (http://github.com/cahyadsn/wilayah)
++ This apps have db data dependencies on 'wilayah' application (http://wilayah.cahyadsn.com/v2/) source code (http://github.com/cahyadsn/wilayah)
