@@ -1,6 +1,11 @@
 # NeoAdzan
 NeoAdzan Islamic Prayer Time Schedule in PHP language. Build on PHP language and MySQL/MariaDB database server 
 
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/cahyadsn/neoadzan/master/LICENSE)
+[![GitHub forks](https://img.shields.io/github/forks/cahyadsn/mbti.svg)](https://github.com/cahyadsn/neoadzan/network)
+[![GitHub stars](https://img.shields.io/github/stars/cahyadsn/mbti.svg)](https://github.com/cahyadsn/mbneoadzanti/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/cahyadsn/mbti.svg)](https://github.com/cahyadsn/neoadzan/issues)
+
 ## Installation
 1. download 'neoadzan_master.zip' file
 2. extract and copy all files to document root folder on your webserver (or other folder that you want)
@@ -15,6 +20,7 @@ NeoAdzan Islamic Prayer Time Schedule in PHP language. Build on PHP language and
 
 ## Donation
 + BNI Syariah : 0821 342 555
++ Paypal : (https://paypal.me/cahyadwiana)
 
 ## Contact
 + facebook (https://m.facebook.com/cahya.dsn)
@@ -22,5 +28,3 @@ NeoAdzan Islamic Prayer Time Schedule in PHP language. Build on PHP language and
 + demo site    : (http://neoadzan.cahyadsn.com) 
 + source code  : (https://github.com/cahyadsn/neoadzan)
 
-## Notes
-+ This apps have db data dependencies on 'wilayah' application (http://wilayah.cahyadsn.com/v2/) source code (http://github.com/cahyadsn/wilayah)
