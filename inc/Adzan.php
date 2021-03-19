@@ -6,7 +6,7 @@ filename : Adzan.php
 package  : /cahyadsn/neoadzan
 purpose  :
 create   : 2018/05/08
-last edit: 2019/10/09
+last edit: 2021-03-19
 author   : cahya dsn
 ================================================================================
 This program is free software; you can redistribute it and/or modify it under the
@@ -280,7 +280,7 @@ class Adzan
     function computeMidDay($t)
     {
         $T = $this->equationOfTime($this->JDate+ $t);
-        $Z = fmod((12- $T),24.0);
+        $Z = $this->fixhour(12- $T);
         return abs($Z);
     }
 
