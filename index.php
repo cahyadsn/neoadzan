@@ -4,6 +4,7 @@
  *  BISMILLAAHIRRAHMAANIRRAHIIM - In the Name of Allah, Most Gracious, Most Merciful
 ================================================================================
 FILENAME     : index.php
+PURPOSE      : main page application
 AUTHOR       : CAHYA DSN
 CREATED DATE : 2018-01-25
 UPDATED DATE : 2021-03-07

@@ -2,21 +2,28 @@
 /*
 BISMILLAAHIRRAHMAANIRRAHIIM - In the Name of Allah, Most Gracious, Most Merciful
 ================================================================================
-filename : neoadzan_ajax.php
-purpose  :
-create   : 2018/04/08
-last edit: 200421,180408
-author   : cahya dsn
+FILENAME     : neoadzan_ajax.php
+PURPOSE      : Calculating and Return Result via Ajax Call
+AUTHOR       : CAHYA DSN
+CREATED DATE : 2018-01-25
+UPDATED DATE : 2021-03-07
+DEMO SITE    : http://neoadzan.cahyadsn.com
+SOURCE CODE  : https://github.com/cahyadsn/neoadzan
 ================================================================================
 This program is free software; you can redistribute it and/or modify it under the
-terms of the GNU General Public License as published by the Free Software
-Foundation; either version 2 of the License, or (at your option) any later version.
+terms of the MIT License.
 
-This program is distributed in the hope that it will be useful, but WITHOUT ANY
-WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
-A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
-copyright (c) 2018-2020 by cahya dsn; cahyadsn@gmail.com
+See the MIT License for more details
+
+copyright (c) 2018-2021 by cahya dsn; cahyadsn@gmail.com
 ================================================================================*/
 include "db.php";
 include "NeoAdzan.php";
