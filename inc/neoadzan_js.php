@@ -42,16 +42,15 @@ var pesan=function(msg){
 	$("#msg_box").delay(2000).fadeOut();			
 }
 $(document).ready(function(){
-	//--
-	$('a.color').on('click',function() {
-      var a = $(this).attr('data-value');
-      document.getElementById('adzan_css').href = 'css/w3-theme-' + a + '.css';
-      $.post('inc/change.color.php', {
+   //--
+   $('a.color').on('click',function() {
+       var a = $(this).attr('data-value');
+       document.getElementById('adzan_css').href = 'css/w3-theme-' + a + '.css';
+       $.post('inc/change.color.php', {
           'color': a
-      })
-	  myPolygon.setOptions({fillColor: a,strokeColor: a});
-	});
-	//--
+       })
+    });
+    //--
 	$('.slcProv').on('change',function(){
 		$('div#preload').show();
 		var url="inc/neoadzan_ajax.php?sid="+Math.random();
