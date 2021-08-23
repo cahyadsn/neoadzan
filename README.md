@@ -19,7 +19,7 @@ NeoAdzan Islamic Prayer Time Schedule in PHP language. Build on PHP language and
 + MySQL (http://www.mysql.com/), 
 
 ## Donation
-+ BNI Syariah : 0821 342 555
++ Bank Syariah Sayriah : 821 342 5550
 + Paypal : (https://paypal.me/cahyadwiana)
 
 ## Contact
