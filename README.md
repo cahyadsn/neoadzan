@@ -1,5 +1,5 @@
 # NeoAdzan
-NeoAdzan Islamic Prayer Time Schedule in PHP language. Build on PHP language and MySQL/MariaDB database server 
+NeoAdzan Islamic Prayer Time Schedule in PHP language. Build on PHP language and MySQL/MariaDB database server
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/cahyadsn/neoadzan/master/LICENSE)
 [![GitHub forks](https://img.shields.io/github/forks/cahyadsn/mbti.svg)](https://github.com/cahyadsn/neoadzan/network)
@@ -15,11 +15,11 @@ NeoAdzan Islamic Prayer Time Schedule in PHP language. Build on PHP language and
 6. try accesing to http://localhost (or other -- depend on step 2 above), enjoy!
 
 ## Technology
-+ PHP (http://www.php.net/), 
-+ MySQL (http://www.mysql.com/), 
++ PHP (http://www.php.net/),
++ MySQL (http://www.mysql.com/),
 
 ## ToDo
-- ubah data ke data wilayah sesuai permendagri No 58 Tahun 2021
+- ubah data ke data wilayah sesuai permendagri No 58 Tahun 2021 (on progress)
 
 ## Donation
 + Bank Syariah Sayriah : 821 342 5550
@@ -28,6 +28,6 @@ NeoAdzan Islamic Prayer Time Schedule in PHP language. Build on PHP language and
 ## Contact
 + facebook (https://m.facebook.com/cahya.dsn)
 + email (cahyadsn@gmail.com)
-+ demo site    : (http://neoadzan.cahyadsn.com) 
++ demo site    : (http://neoadzan.cahyadsn.com)
 + source code  : (https://github.com/cahyadsn/neoadzan)
 
