@@ -19,7 +19,7 @@ NeoAdzan Islamic Prayer Time Schedule in PHP language. Build on PHP language and
 + MySQL (http://www.mysql.com/),
 
 ## New Update
-- ubah data ke data wilayah sesuai Kepmendagri No 100.1.1-6117 Tahun 2022 (done 2024-05-15)
+- ubah data web demo  ke data wilayah sesuai Kepmendagri No 100.1.1-6117 Tahun 2022 (done 2024-05-15)
 
 ## Donation
 + Bank Syariah Sayriah : 821 342 5550
