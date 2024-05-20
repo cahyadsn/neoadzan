@@ -22,7 +22,10 @@ NeoAdzan Islamic Prayer Time Schedule in PHP language. Build on PHP language and
 - ubah data web demo  ke data wilayah sesuai Kepmendagri No 100.1.1-6117 Tahun 2022 (done 2024-05-15)
 
 ## Donation
-+ Bank Syariah Sayriah : 821 342 5550
++ Transfer Bank :
+  + Bank Syariah Indonesia (BSI) 821-342-5550
+  + Bank Sinarmas (153) 005 462 4719
+  + Bank BCA Digital (Blu) (501) 000 576 776 186
 + Paypal : (https://paypal.me/cahyadwiana)
 
 ## Contact
