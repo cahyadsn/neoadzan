@@ -38,7 +38,7 @@ $neoadzan=new NeoAdzan();
 $neoadzan->setLatLng(-6.17501,106.820497);
 $neoadzan->setTimeZone(7);
 $sch=$neoadzan->getSchedule(date('Y'),date('n'));
-$version='1.0.3';
+$version='1.0.4';
 $app_name='NeoAdzan!';
 /*header('Expires: '.date('r'));
 header('Cache-Control: no-store, no-cache, must-revalidate');
