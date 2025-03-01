@@ -9,9 +9,9 @@ NeoAdzan Islamic Prayer Time Schedule in PHP language. Build on PHP language and
 ## Installation
 1. download 'neoadzan_master.zip' file
 2. extract and copy all files to document root folder on your webserver (or other folder that you want)
-3. create new database named 'test'
-4. import 'db/db_neoadzan.sql' to the 'test' database
-5. change database configuration on 'index.php' and 'result.php' file (default value is $dbhost='localhost; $dbuser='root'; $dbpass='';dbname='test';)
+3. create new database named 'wilayah'
+4. import 'db/wilayah_lelevl_1_2.sql' to the 'wilayah' database
+5. change database configuration on 'db.php' file (default value is $dbhost='localhost; $dbuser='root'; $dbpass='';dbname='wilayah';)
 6. try accesing to http://localhost (or other -- depend on step 2 above), enjoy!
 
 ## Technology
@@ -19,6 +19,7 @@ NeoAdzan Islamic Prayer Time Schedule in PHP language. Build on PHP language and
 + MySQL (http://www.mysql.com/),
 
 ## New Update
+- mengganti jquey.min.js dengan zepto.min.js (done 2025-03-01)
 - ubah data web demo  ke data wilayah sesuai Kepmendagri No 100.1.1-6117 Tahun 2022 (done 2024-05-15)
 
 ## Donation

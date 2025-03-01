@@ -7,7 +7,7 @@ FILENAME     : index.php
 PURPOSE      : main page application
 AUTHOR       : CAHYA DSN
 CREATED DATE : 2018-01-25
-UPDATED DATE : 2021-03-07
+UPDATED DATE : 2025-03-01 10:11:04
 DEMO SITE    : http://neoadzan.cahyadsn.com
 SOURCE CODE  : https://github.com/cahyadsn/neoadzan
 ================================================================================
@@ -24,7 +24,7 @@ SOFTWARE.
 
 See the MIT License for more details
 
-copyright (c) 2018-2021 by cahya dsn; cahyadsn@gmail.com
+copyright (c) 2018-2025 by cahya dsn; cahyadsn@gmail.com
 ================================================================================*/
 session_start();
 $c=isset($_SESSION['c'])?$_SESSION['c']:(isset($_GET['c'])?$_GET['c']:'indigo');
@@ -38,7 +38,7 @@ $neoadzan=new NeoAdzan();
 $neoadzan->setLatLng(-6.17501,106.820497);
 $neoadzan->setTimeZone(7);
 $sch=$neoadzan->getSchedule(date('Y'),date('n'));
-$version='1.0.2';
+$version='1.0.3';
 $app_name='NeoAdzan!';
 /*header('Expires: '.date('r'));
 header('Cache-Control: no-store, no-cache, must-revalidate');
@@ -228,6 +228,6 @@ header('Pragma: no-cache');*/
           </div>
       </div>
     </body>
-    <script src="js/jquery.min.js"></script>
+    <script src="js/zepto.min.js"></script>
     <script src="inc/neoadzan_js.php?v=<?php echo $_SESSION['ver'];?>"></script>
 </html>
