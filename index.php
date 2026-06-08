@@ -7,7 +7,7 @@ FILENAME     : index.php
 PURPOSE      : main page application
 AUTHOR       : CAHYA DSN
 CREATED DATE : 2018-01-25
-UPDATED DATE : 2025-03-01 10:11:04
+UPDATED DATE : 2026-06-08 13:39:43
 DEMO SITE    : http://neoadzan.cahyadsn.com
 SOURCE CODE  : https://github.com/cahyadsn/neoadzan
 ================================================================================
@@ -24,7 +24,7 @@ SOFTWARE.
 
 See the MIT License for more details
 
-copyright (c) 2018-2025 by cahya dsn; cahyadsn@gmail.com
+copyright (c) 2018-2026 by cahya dsn; cahyadsn@gmail.com
 ================================================================================*/
 session_start();
 $c=isset($_SESSION['c'])?$_SESSION['c']:(isset($_GET['c'])?$_GET['c']:'indigo');
@@ -38,7 +38,7 @@ $neoadzan=new NeoAdzan();
 $neoadzan->setLatLng(-6.17501,106.820497);
 $neoadzan->setTimeZone(7);
 $sch=$neoadzan->getSchedule(date('Y'),date('n'));
-$version='1.0.4';
+$version='2.0.0';
 $app_name='NeoAdzan!';
 /*header('Expires: '.date('r'));
 header('Cache-Control: no-store, no-cache, must-revalidate');
@@ -53,16 +53,16 @@ header('Pragma: no-cache');*/
     <meta http-equiv="expires" content="<?php echo date('r');?>" />
     <meta http-equiv="pragma" content="no-cache" />
     <meta http-equiv="cache-control" content="no-cache" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <meta http-equiv="content-language" content="en" />
-        <meta name="author" content="Cahya DSN" />
-        <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
-        <meta name="keywords" content="php, mysql, jadwal, waktu, shalat, cahyadsn" />
-        <meta name="description" content="<?php echo "{$app_name} v {$version}";?> created by cahya dsn, Jadwal Waktu Shalat, dalam bahasa pemrograman PHP dan database MySQL" />
-        <meta name="robots" content="index, follow" />
-        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-        <link rel="stylesheet" href="css/w3.css">
-        <link rel="stylesheet" href="css/w3-theme-<?php echo $c;?>.css" media="all" id="adzan_css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="content-language" content="en" />
+    <meta name="author" content="Cahya DSN" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+    <meta name="keywords" content="php, mysql, jadwal, waktu, shalat, cahyadsn" />
+    <meta name="description" content="<?php echo "{$app_name} v {$version}";?> created by cahya dsn, Jadwal Waktu Shalat, dalam bahasa pemrograman PHP dan database MySQL" />
+    <meta name="robots" content="index, follow" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/w3.css">
+    <link rel="stylesheet" href="css/w3-theme-<?php echo $c;?>.css" media="all" id="adzan_css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <!-- link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway" //-->
     <link rel="stylesheet" href="css/neoadzan_css.php?v=<?php echo md5(filemtime('css/neoadzan_css.php'));?>">
@@ -228,6 +228,5 @@ header('Pragma: no-cache');*/
           </div>
       </div>
     </body>
-    <script src="js/zepto.min.js"></script>
     <script src="inc/neoadzan_js.php?v=<?php echo $_SESSION['ver'];?>"></script>
 </html>

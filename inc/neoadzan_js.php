@@ -6,7 +6,7 @@ FILENAME     : neoadzan_js.php
 PURPOSE      : generate js script 
 AUTHOR       : CAHYA DSN
 CREATED DATE : 2018-01-25
-UPDATED DATE : 2021-03-07
+UPDATED DATE : 2026-06-08 13:40:28
 DEMO SITE    : http://neoadzan.cahyadsn.com
 SOURCE CODE  : https://github.com/cahyadsn/neoadzan
 ================================================================================
@@ -23,7 +23,7 @@ SOFTWARE.
 
 See the MIT License for more details
 
-copyright (c) 2018-2021 by cahya dsn; cahyadsn@gmail.com
+copyright (c) 2018-2026 by cahya dsn; cahyadsn@gmail.com
 ================================================================================*/
 session_start();
 header("Content-type: text/javascript");
@@ -35,124 +35,152 @@ if(isset($_SESSION['author']) && $_SESSION['author']=='cahyadsn'){
 	die('illegal call');
 }
 ?>
-var pesan=function(msg){
-	$("#msg_box").html(msg);
-	$("#msg_box").addClass("w3-red");
-	$("#msg_box").show();
-	$("#msg_box").delay(2000).fadeOut();			
+var pesan = function(msg) {
+    var msgBox = document.getElementById("msg_box");
+    msgBox.innerHTML = msg;
+    msgBox.classList.add("w3-red");
+    msgBox.style.display = "block";
+    msgBox.style.opacity = "1";
+    setTimeout(function() {
+        msgBox.style.transition = "opacity 1s";
+        msgBox.style.opacity = "0";
+        setTimeout(function() {
+            msgBox.style.display = "none";
+            msgBox.style.transition = "";
+        }, 1000);
+    }, 2000);
 }
-$(document).ready(function(){
-   //--
-   $('a.color').on('click',function() {
-       var a = $(this).attr('data-value');
-       document.getElementById('adzan_css').href = 'css/w3-theme-' + a + '.css';
-       $.post('inc/change.color.php', {
-          'color': a
-       })
+
+function post(url, data) {
+    return fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams(data)
+    }).then(response => response.json());
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('a.color').forEach(function(el) {
+        el.addEventListener('click', function(e) {
+            e.preventDefault();
+            var a = this.getAttribute('data-value');
+            document.getElementById('adzan_css').href = 'css/w3-theme-' + a + '.css';
+            post('inc/change.color.php', { 'color': a });
+        });
     });
-    //--
-	$('.slcProv').on('change',function(){
-		$('div#preload').show();
-		var url="inc/neoadzan_ajax.php?sid="+Math.random();
-		$.post(
-			url,
-			{id:$(this).val(),y:$('#y').val(),m:$('#m').val()},
-			function(d){
-				if(!d.status){
-					alert(d.status);
-				}else{
-					$('#kota').html(d.opt);
-					$('#sch').html(d.data.sch);
-					$('.sprov').html('Provinsi '+d.data.nama);
-					$('.skab').html('');
-					$('.slat').html(d.data.lat);
-					$('.slng').html(d.data.lng);
-					$('.stz').html(d.data.tz)
-				}
-				$('div#preload').hide();
-			}
-		);
-	});
-	$('.slcKab').on('change',function(){
-		$('div#preload').show();
-		var url="inc/neoadzan_ajax.php?sid="+Math.random();
-		$.post(
-			url,
-			{id:$(this).val(),y:$('#y').val(),m:$('#m').val()},
-			function(d){
-				if(!d.status){
-					alert(d.status);
-				}else{
-					console.log(d);
-					$('#sch').html(d.data.sch);
-					$('.skab').html(d.data.nama+' , ');
-					$('.slat').html(d.data.lat);
-					$('.slng').html(d.data.lng);
-					$('.stz').html(d.data.tz);
-				}
-				$('div#preload').hide();
-			}
-		);
-	});
-	var m,y;
-	var changeMonth = function(){
-		$('div#preload').show();
-		var url="inc/neoadzan_ajax.php?sid="+Math.random();
-		var idx=$('#kota').val();
-		if(idx=='') idx=$('#prop').val();
-		$.post(
-			url,
-			{id:idx,y:$('#y').val(),m:$('#m').val()},
-			function(d){
-				if(!d.status){
-					alert(d.status);
-				}else{
-					//console.log(d);
-					$('#sch').html(d.data.sch);
-					$('#periode').html(d.data.periode);
-                    $('#rentang').html(d.data.rentang);
-				}
-				$('div#preload').hide();
-			}
-		);
-	};
-	$('#prevMonth').on('click',function(e){
-		e.preventDefault();
-		m=parseInt($('#m').val());
-		y=parseInt($('#y').val());
-		if(m>1){m-=1;} else {m=12;y-=1;}
-		$('#m').val(m);
-		$('#y').val(y);
-		changeMonth();
-	});
-	$('#prevYear').on('click',function(e){
-		e.preventDefault();
-		y=parseInt($('#y').val());
-		$('#y').val(--y);
-		changeMonth();
-	});
-	$('#nextMonth').on('click',function(e){
-		e.preventDefault();
-		m=parseInt($('#m').val());
-		y=parseInt($('#y').val());
-		if(m<12){m+=1;} else {m=1;y+=1;}
-		$('#y').val(y);
-		$('#m').val(m);
-		changeMonth();
-	});
-	$('#nextYear').on('click',function(e){
-		e.preventDefault();
-		y=parseInt($('#y').val());
-		$('#y').val(++y);
-		changeMonth();
-	});
-	function deg2dms(t) {
-		var a = 0 > t ? "-" : "";
-		t = Math.abs(t);
-		var i = Math.floor(t),
-		n = 60 * (t - i),
-		r = Math.floor(n),
-		e = 60 * (n - r);
-		return a + i + "\u00b0" + r + "'" + e.toFixed(2) + '"'
-	}
+
+    document.querySelectorAll('.slcProv').forEach(function(el) {
+        el.addEventListener('change', function() {
+            document.getElementById('preload').style.display = 'block';
+            var url = "inc/neoadzan_ajax.php?sid=" + Math.random();
+            post(url, {
+                id: this.value,
+                y: document.getElementById('y').value,
+                m: document.getElementById('m').value
+            }).then(function(d) {
+                if (!d.status) {
+                    alert(d.status);
+                } else {
+                    document.getElementById('kota').innerHTML = d.opt;
+                    document.getElementById('sch').innerHTML = d.data.sch;
+                    document.querySelectorAll('.sprov').forEach(function(el) { el.innerHTML = 'Provinsi ' + d.data.nama; });
+                    document.querySelectorAll('.skab').forEach(function(el) { el.innerHTML = ''; });
+                    document.querySelectorAll('.slat').forEach(function(el) { el.innerHTML = d.data.lat; });
+                    document.querySelectorAll('.slng').forEach(function(el) { el.innerHTML = d.data.lng; });
+                    document.querySelectorAll('.stz').forEach(function(el) { el.innerHTML = d.data.tz; });
+                }
+                document.getElementById('preload').style.display = 'none';
+            });
+        });
+    });
+
+    document.querySelectorAll('.slcKab').forEach(function(el) {
+        el.addEventListener('change', function() {
+            document.getElementById('preload').style.display = 'block';
+            var url = "inc/neoadzan_ajax.php?sid=" + Math.random();
+            post(url, {
+                id: this.value,
+                y: document.getElementById('y').value,
+                m: document.getElementById('m').value
+            }).then(function(d) {
+                if (!d.status) {
+                    alert(d.status);
+                } else {
+                    document.getElementById('sch').innerHTML = d.data.sch;
+                    document.querySelectorAll('.skab').forEach(function(el) { el.innerHTML = d.data.nama + ' , '; });
+                    document.querySelectorAll('.slat').forEach(function(el) { el.innerHTML = d.data.lat; });
+                    document.querySelectorAll('.slng').forEach(function(el) { el.innerHTML = d.data.lng; });
+                    document.querySelectorAll('.stz').forEach(function(el) { el.innerHTML = d.data.tz; });
+                }
+                document.getElementById('preload').style.display = 'none';
+            });
+        });
+    });
+
+    var changeMonth = function() {
+        document.getElementById('preload').style.display = 'block';
+        var url = "inc/neoadzan_ajax.php?sid=" + Math.random();
+        var idx = document.getElementById('kota').value;
+        if (idx == '') idx = document.getElementById('prop').value;
+        post(url, {
+            id: idx,
+            y: document.getElementById('y').value,
+            m: document.getElementById('m').value
+        }).then(function(d) {
+            if (!d.status) {
+                alert(d.status);
+            } else {
+                document.getElementById('sch').innerHTML = d.data.sch;
+                document.getElementById('periode').innerHTML = d.data.periode;
+                document.getElementById('rentang').innerHTML = d.data.rentang;
+            }
+            document.getElementById('preload').style.display = 'none';
+        });
+    };
+
+    document.getElementById('prevMonth').addEventListener('click', function(e) {
+        e.preventDefault();
+        var m = parseInt(document.getElementById('m').value);
+        var y = parseInt(document.getElementById('y').value);
+        if (m > 1) { m -= 1; } else { m = 12; y -= 1; }
+        document.getElementById('m').value = m;
+        document.getElementById('y').value = y;
+        changeMonth();
+    });
+
+    document.getElementById('prevYear').addEventListener('click', function(e) {
+        e.preventDefault();
+        var y = parseInt(document.getElementById('y').value);
+        document.getElementById('y').value = --y;
+        changeMonth();
+    });
+
+    document.getElementById('nextMonth').addEventListener('click', function(e) {
+        e.preventDefault();
+        var m = parseInt(document.getElementById('m').value);
+        var y = parseInt(document.getElementById('y').value);
+        if (m < 12) { m += 1; } else { m = 1; y += 1; }
+        document.getElementById('y').value = y;
+        document.getElementById('m').value = m;
+        changeMonth();
+    });
+
+    document.getElementById('nextYear').addEventListener('click', function(e) {
+        e.preventDefault();
+        var y = parseInt(document.getElementById('y').value);
+        document.getElementById('y').value = ++y;
+        changeMonth();
+    });
+
+    function deg2dms(t) {
+        var a = 0 > t ? "-" : "";
+        t = Math.abs(t);
+        var i = Math.floor(t),
+            n = 60 * (t - i),
+            r = Math.floor(n),
+            e = 60 * (n - r);
+        return a + i + "\u00b0" + r + "'" + e.toFixed(2) + '"'
+    }
 });

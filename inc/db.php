@@ -6,7 +6,7 @@ FILENAME     : db.php
 PURPOSE      : db connection configuraton
 AUTHOR       : CAHYA DSN
 CREATED DATE : 2018-01-25
-UPDATED DATE : 2025-03-01 08:47:07
+UPDATED DATE : 2026-06-08 13:41:03
 DEMO SITE    : http://neoadzan.cahyadsn.com
 SOURCE CODE  : https://github.com/cahyadsn/neoadzan
 ================================================================================
@@ -23,13 +23,49 @@ SOFTWARE.
 
 See the MIT License for more details
 
-copyright (c) 2018-2025 by cahya dsn; cahyadsn@gmail.com
+copyright (c) 2018-2026 by cahya dsn; cahyadsn@gmail.com
 ================================================================================*/
-$dbhost='localhost';
-$dbuser='root';
-$dbpass='';
-$dbname='wilayah';
-$dbtable='wilayah_level_1_2';
+
+/**
+ * Simple .env loader
+ */
+function loadEnv($path)
+{
+    if (!file_exists($path)) {
+        return false;
+    }
+
+    $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        if (strpos(trim($line), '#') === 0) {
+            continue;
+        }
+
+        if (strpos($line, '=') === false) {
+            continue;
+        }
+
+        list($name, $value) = explode('=', $line, 2);
+        $name = trim($name);
+        $value = trim($value);
+
+        if (!array_key_exists($name, $_SERVER) && !array_key_exists($name, $_ENV)) {
+            putenv(sprintf('%s=%s', $name, $value));
+            $_ENV[$name] = $value;
+            $_SERVER[$name] = $value;
+        }
+    }
+    return true;
+}
+
+loadEnv(__DIR__ . '/../.env');
+
+$dbhost = getenv('DB_HOST') ?: 'localhost';
+$dbuser = getenv('DB_USER') ?: 'root';
+$dbpass = getenv('DB_PASS') ?: '';
+$dbname = getenv('DB_NAME') ?: 'wilayah';
+$dbtable = getenv('DB_TABLE') ?: 'wilayah_level_1_2';
+
 $db_dsn = "mysql:dbname=$dbname;host=$dbhost";
 try {
   $db = new PDO($db_dsn, $dbuser, $dbpass);
