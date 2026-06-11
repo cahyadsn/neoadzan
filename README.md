@@ -7,6 +7,9 @@ NeoAdzan is a robust and modern Islamic Prayer Time Schedule application built w
 [![GitHub stars](https://img.shields.io/github/stars/cahyadsn/neoadzan.svg)](https://github.com/cahyadsn/neoadzan/stargazers)
 [![GitHub issues](https://img.shields.io/github/issues/cahyadsn/neoadzan.svg)](https://github.com/cahyadsn/neoadzan/issues)
 
+## SCREENSHOT
+[![screenshot](https://github.com/cahyadsn/neoadzan/blob/master/img/ss002.png?raw=true 'neoadzan demo v2.0')](https://neoadzan.cahyadsn.com/)
+
 ## ✨ Features
 
 - **Accurate Calculations**: Supports multiple calculation methods (Depag RI, MWL, ISNA, Egypt, Makkah, Karachi, Tehran, Jafari).
