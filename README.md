@@ -1,45 +1,87 @@
 # NeoAdzan
-NeoAdzan Islamic Prayer Time Schedule in PHP language. Build on PHP language and MySQL/MariaDB database server
+
+NeoAdzan is a robust and modern Islamic Prayer Time Schedule application built with PHP and MySQL. It provides accurate prayer times based on geographical coordinates and offers various calculation methods used worldwide.
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/cahyadsn/neoadzan/master/LICENSE)
-[![GitHub forks](https://img.shields.io/github/forks/cahyadsn/mbti.svg)](https://github.com/cahyadsn/neoadzan/network)
-[![GitHub stars](https://img.shields.io/github/stars/cahyadsn/mbti.svg)](https://github.com/cahyadsn/mbneoadzanti/stargazers)
-[![GitHub issues](https://img.shields.io/github/issues/cahyadsn/mbti.svg)](https://github.com/cahyadsn/neoadzan/issues)
+[![GitHub forks](https://img.shields.io/github/forks/cahyadsn/neoadzan.svg)](https://github.com/cahyadsn/neoadzan/network)
+[![GitHub stars](https://img.shields.io/github/stars/cahyadsn/neoadzan.svg)](https://github.com/cahyadsn/neoadzan/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/cahyadsn/neoadzan.svg)](https://github.com/cahyadsn/neoadzan/issues)
 
-## Installation
-1. download 'neoadzan_master.zip' file
-2. extract and copy all files to document root folder on your webserver (or other folder that you want)
-3. create new database named 'wilayah'
-4. import 'db/wilayah_level_1_2.sql' to the 'wilayah' database
-5. copy '.env.example' to '.env' (if provided) or create '.env' file and change database configuration (default values are DB_HOST=localhost, DB_USER=root, DB_PASS=, DB_NAME=wilayah)
-6. try accesing to http://localhost (or other -- depend on step 2 above), enjoy!
+## ✨ Features
 
-## Technology
-+ PHP (http://www.php.net/),
-+ MySQL (http://www.mysql.com/),
-+ Vanilla JS
+- **Accurate Calculations**: Supports multiple calculation methods (Depag RI, MWL, ISNA, Egypt, Makkah, Karachi, Tehran, Jafari).
+- **Hijri Calendar**: Integrated Hijri date conversion and display.
+- **Regional Support**: Includes Indonesian regional data (Province & District) based on **Kepmendagri No 300.2.2-2430 Tahun 2025**.
+- **Flexible Schedules**: View daily and monthly prayer schedules.
+- **Modern UI**: Clean, responsive design using native modern CSS architecture and Vanilla JavaScript (No jQuery/Zepto dependencies).
+- **API Ready**: Provides JSON endpoints for easy integration with other platforms.
+- **Customizable**: Adjustable calculation parameters for Imsak, Dhuha, and more.
 
-## New Update
-- modernization look and feel, replace w3.css with modern native CSS architecture (done 2026-06-08)
-- ubah data web demo  ke data wilayah sesuai Kepmendagri No 300.2.2-2430 Tahun 2025 (done 2026-06-08)
-- mengganti zepto.min.js dengan vanilla js (done 2026-06-08)
-- mengganti jquey.min.js dengan zepto.min.js (done 2025-03-01)
-- ubah data web demo  ke data wilayah sesuai Kepmendagri No 100.1.1-6117 Tahun 2022 (done 2024-05-15)
+## 🛠 Technology Stack
 
-## Donation
-- untuk donasi via transfer
-    - Bank BCA Digital (Blu) (501) 000 576 776 186
-    - Bank Jago (542) 5003 5796 1022
-    - Bank Sinarmas (153) 005 462 4719
-    - Bank Syariah Indonesia (BSI) 821-342-5550
-- untuk donasi via PayPal [https://paypal.me/cahyadwiana]
-- untuk donasi via QRIS CAHYADSN ID1022183125288 :
+- **Backend**: PHP 7.4+ (OOP with Traits)
+- **Database**: MySQL / MariaDB (using PDO)
+- **Frontend**: Vanilla JavaScript (ES6+), Modern CSS3
+- **Icons**: Font Awesome 4.7
+- **Configuration**: Dotenv support for environment variables
 
-![screenshot](https://github.com/cahyadsn/wilayah/blob/master/docs/qr_code.cahyadsn.png?raw=true 'Donasi via QRIS CAHYADSN')
+## 🚀 Installation
 
-## Contact
-+ facebook (https://m.facebook.com/cahya.dsn)
-+ email (cahyadsn@gmail.com)
-+ demo site    : (http://neoadzan.cahyadsn.com)
-+ source code  : (https://github.com/cahyadsn/neoadzan)
+1. **Download**: Clone this repository or download the source code.
+   ```bash
+   git clone https://github.com/cahyadsn/neoadzan.git
+   ```
+2. **Database Setup**:
+   - Create a new database (e.g., `wilayah`).
+   - Import the database schema from `db/wilayah_level_1_2.sql`.
+3. **Configuration**:
+   - Copy `.env.example` to `.env`.
+   - Update the database credentials in the `.env` file:
+     ```env
+     DB_HOST=localhost
+     DB_USER=your_username
+     DB_PASS=your_password
+     DB_NAME=wilayah
+     ```
+4. **Deploy**: Copy all files to your web server's document root.
+5. **Access**: Navigate to `http://localhost/neoadzan` in your browser.
+
+## 📡 API Endpoints
+
+NeoAdzan provides several API endpoints:
+
+- **Get Daily Schedule**: `api/getDaily.php?lat={lat}&lng={lng}&z={timezone}`
+- **Get Monthly Schedule**: `api/getMonthly.php?lat={lat}&lng={lng}&z={timezone}&y={year}&m={month}`
+- **Get Provinces**: `api/getProvince.php`
+- **Get Districts**: `api/getDistrict.php?id={province_id}`
+
+## 🔄 Recent Updates
+
+- **2026-06-08**: Modernized UI/UX with native modern CSS and Vanilla JS.
+- **2026-06-08**: Updated regional data to Kepmendagri No 300.2.2-2430 Year 2025.
+- **2025-03-01**: Migrated from jQuery to Zepto.min.js (later replaced by Vanilla JS).
+- **2024-05-15**: Updated regional data to Kepmendagri No 100.1.1-6117 Year 2022.
+
+## ☕ Donation
+
+Support the development of this project:
+
+- **Bank BCA Digital (Blu)**: 000 576 776 186
+- **Bank Jago**: 5003 5796 1022
+- **Bank Sinarmas**: 005 462 4719
+- **Bank Syariah Indonesia (BSI)**: 821-342-5550
+- **PayPal**: [https://paypal.me/cahyadwiana](https://paypal.me/cahyadwiana)
+- **QRIS**: Scan the QR code below
+
+![QRIS Donation](https://github.com/cahyadsn/wilayah/blob/master/docs/qr_code.cahyadsn.png?raw=true)
+
+## 📞 Contact
+
+- **Facebook**: [cahya.dsn](https://m.facebook.com/cahya.dsn)
+- **Email**: cahyadsn@gmail.com
+- **Demo**: [neoadzan.cahyadsn.com](http://neoadzan.cahyadsn.com)
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
