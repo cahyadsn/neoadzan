@@ -7,7 +7,7 @@ FILENAME     : index.php
 PURPOSE      : main page application
 AUTHOR       : CAHYA DSN
 CREATED DATE : 2018-01-25
-UPDATED DATE : 2026-06-11 15:45:00
+UPDATED DATE : 2026-06-11 15:04:15
 DEMO SITE    : http://neoadzan.cahyadsn.com
 SOURCE CODE  : https://github.com/cahyadsn/neoadzan
 ================================================================================*/
@@ -67,9 +67,10 @@ $app_name='NeoAdzan!';
             <div class="card">
                 <div class="card-header">
                     <h2 class="card-title"><?php echo "{$app_name} v {$version}";?></h2>
-                    <div class="theme-selector">
-                        <?php
-                        $colors=array(
+                    <div class="nav-buttons">
+ 					    <div class="theme-selector">
+                            <?php
+                            $colors=array(
                             "black"=>"#000000",
                             "brown"=>"#795548",
                             "pink"=>"#e91e63",
@@ -87,6 +88,10 @@ $app_name='NeoAdzan!';
                             echo "<div class='theme-dot' style='background-color: {$hex};' data-theme='{$clr}' data-value='{$clr}' title='{$clr}'></div>";
                         }
                         ?>
+						</div>
+						<div id="themeToggle" class="theme-toggle" title="Toggle Dark/Light Mode">
+                            <i class="fa fa-moon-o"></i>
+                        </div>
                     </div>
                 </div>
                 

@@ -6,7 +6,7 @@ FILENAME     : neoadzan_js.php
 PURPOSE      : generate js script 
 AUTHOR       : CAHYA DSN
 CREATED DATE : 2018-01-25
-UPDATED DATE : 2026-06-11 15:45:00
+UPDATED DATE : 2026-06-11 16:15:00
 DEMO SITE    : http://neoadzan.cahyadsn.com
 SOURCE CODE  : https://github.com/cahyadsn/neoadzan
 ================================================================================
@@ -65,6 +65,22 @@ function post(url, data) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    var themeToggle = document.getElementById('themeToggle');
+    var html = document.documentElement;
+    var currentMode = localStorage.getItem('mode') || 'light';
+    
+    html.setAttribute('data-mode', currentMode);
+    if (themeToggle) {
+        themeToggle.querySelector('i').className = currentMode === 'dark' ? 'fa fa-sun-o' : 'fa fa-moon-o';
+        
+        themeToggle.addEventListener('click', function() {
+            var mode = html.getAttribute('data-mode') === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-mode', mode);
+            localStorage.setItem('mode', mode);
+            this.querySelector('i').className = mode === 'dark' ? 'fa fa-sun-o' : 'fa fa-moon-o';
+        });
+    }
+
     document.querySelectorAll('.theme-dot').forEach(function(el) {
         el.addEventListener('click', function(e) {
             e.preventDefault();
