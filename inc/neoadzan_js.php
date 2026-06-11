@@ -30,15 +30,15 @@ header("Content-type: text/javascript");
 $c=isset($_SESSION['c'])?$_SESSION['c']:(isset($_GET['c'])?$_GET['c']:'indigo');
 if(isset($_SESSION['author']) && $_SESSION['author']=='cahyadsn'){
 	$v=$_GET['v'];
-	session_destroy();
 } else {
 	die('illegal call');
 }
 ?>
-var pesan = function(msg) {
+var pesan = function(msg, type = 'error') {
     var msgBox = document.getElementById("msg_box");
     msgBox.innerHTML = msg;
-    msgBox.classList.add("w3-red");
+    msgBox.classList.remove("msg-success", "msg-error");
+    msgBox.classList.add(type === 'success' ? "msg-success" : "msg-error");
     msgBox.style.display = "block";
     msgBox.style.opacity = "1";
     setTimeout(function() {
@@ -62,11 +62,11 @@ function post(url, data) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('a.color').forEach(function(el) {
+    document.querySelectorAll('.theme-dot').forEach(function(el) {
         el.addEventListener('click', function(e) {
             e.preventDefault();
             var a = this.getAttribute('data-value');
-            document.getElementById('adzan_css').href = 'css/w3-theme-' + a + '.css';
+            document.documentElement.setAttribute('data-theme', a);
             post('inc/change.color.php', { 'color': a });
         });
     });
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 m: document.getElementById('m').value
             }).then(function(d) {
                 if (!d.status) {
-                    alert(d.status);
+                    pesan(d.error);
                 } else {
                     document.getElementById('kota').innerHTML = d.opt;
                     document.getElementById('sch').innerHTML = d.data.sch;
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 m: document.getElementById('m').value
             }).then(function(d) {
                 if (!d.status) {
-                    alert(d.status);
+                    pesan(d.error);
                 } else {
                     document.getElementById('sch').innerHTML = d.data.sch;
                     document.querySelectorAll('.skab').forEach(function(el) { el.innerHTML = d.data.nama + ' , '; });
@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
             m: document.getElementById('m').value
         }).then(function(d) {
             if (!d.status) {
-                alert(d.status);
+                pesan(d.error);
             } else {
                 document.getElementById('sch').innerHTML = d.data.sch;
                 document.getElementById('periode').innerHTML = d.data.periode;

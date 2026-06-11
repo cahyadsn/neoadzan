@@ -156,11 +156,11 @@ class NeoAdzan extends Adzan
 			$day2= "{$i} {$this->nama_bulan_masehi[$month]} {$year}";
 			$hijri= $this->fromGregorianToHijri($date);
 			$ayamul_bidh=(in_array($hijri[1],array(13,14,15)) && $hijri[0]!=9 && $hijri[0]!=12);
-			$result.="<tr class='".(date('Y-n-j')==$year.'-'.$month.'-'.$i?"w3-theme-d1":"w3-theme-l".($i%2==0?'5':'4'))."'>";
+			$result.="<tr class='".(date('Y-n-j')==$year.'-'.$month.'-'.$i?"active":"")."'>";
 			$result.="<td>{$day2}</td>";
-            $result.="<td class='w3-hide-small'>".($ayamul_bidh?"*":"")."{$hijri[1]} ".ucwords(strtolower($this->nama_bulan_hijriah[$hijri[0]]))." {$hijri[2]}</td>";           
+            $result.="<td>".($ayamul_bidh?"*":"")."{$hijri[1]} ".ucwords(strtolower($this->nama_bulan_hijriah[$hijri[0]]))." {$hijri[2]}</td>";           
 			foreach($times as $k=>$t){
-				$result.=(!in_array($k,array(2,3,6))?"<td".($k==0?" class='w3-hide-small'":"").">{$t}</td>":"");
+				$result.=(!in_array($k,array(2,3,6))?"<td>{$t}</td>":"");
 			}
 			$result.="</tr>";
 			$date = strtotime($day.' + 1 Days');  // next day

@@ -20,6 +20,7 @@ NeoAdzan Islamic Prayer Time Schedule in PHP language. Build on PHP language and
 + Vanilla JS
 
 ## New Update
+- modernization look and feel, replace w3.css with modern native CSS architecture (done 2026-06-08)
 - ubah data web demo  ke data wilayah sesuai Kepmendagri No 300.2.2-2430 Tahun 2025 (done 2026-06-08)
 - mengganti zepto.min.js dengan vanilla js (done 2026-06-08)
 - mengganti jquey.min.js dengan zepto.min.js (done 2025-03-01)
