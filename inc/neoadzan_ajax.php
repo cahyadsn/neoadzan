@@ -6,7 +6,7 @@ FILENAME     : neoadzan_ajax.php
 PURPOSE      : Calculating and Return Result via Ajax Call
 AUTHOR       : CAHYA DSN
 CREATED DATE : 2018-01-25
-UPDATED DATE : 2021-03-07
+UPDATED DATE : 2026-06-11 15:45:00
 DEMO SITE    : http://neoadzan.cahyadsn.com
 SOURCE CODE  : https://github.com/cahyadsn/neoadzan
 ================================================================================
@@ -27,16 +27,27 @@ copyright (c) 2018-2021 by cahya dsn; cahyadsn@gmail.com
 ================================================================================*/
 include "db.php";
 include "NeoAdzan.php";
+include "Cache.php";
+
+$cache = new Cache();
+$cache_key = 'ajax_' . serialize($_POST) . serialize($_GET);
+$cached_result = $cache->get($cache_key);
+
+if ($cached_result) {
+    header('Content-Type: application/json');
+    echo json_encode($cached_result);
+    exit;
+}
 
 $r=array('status'=>false,'error'=>'an error occured');
 if (!empty($_POST['id'])){
-  $query = $db->prepare("SELECT * FROM {$dbtable} WHERE kode=:id");
+  $query = $db->prepare("SELECT kode, nama, lat, lng, tz FROM {$dbtable} WHERE kode=:id");
   $query->execute(array(':id'=>$_POST['id']));
   $d = $query->fetchObject();
   $y=(isset($_POST['y']) && !empty($_POST['y']))?$_POST['y']:date('Y');
   $m=(isset($_POST['m']) && !empty($_POST['m']))?$_POST['m']:date('n');
-  if(empty($d->lat)){
-    $r=array('status'=>false,'error'=>'data not found','tz'=>$d->tz);
+  if(empty($d) || empty($d->lat)){
+    $r=array('status'=>false,'error'=>'data not found','tz'=>($d->tz ?? 7));
   }else{
 	$neoadzan=new NeoAdzan();
 	$neoadzan->setLatLng($d->lat,$d->lng);
@@ -58,7 +69,7 @@ if (!empty($_POST['id'])){
     $n=strlen($_POST['id']);
   	$m=($n==2?5:($n==5?8:13));
   	$wil=($n==2?'Kota/Kab':($n==5?'Kecamatan':'Desa/Kelurahan'));
-  	$query = $db->prepare("SELECT * FROM {$dbtable} WHERE LEFT(kode,:n)=:id AND CHAR_LENGTH(kode)=:m ORDER BY nama");
+  	$query = $db->prepare("SELECT kode, nama FROM {$dbtable} WHERE LEFT(kode,:n)=:id AND CHAR_LENGTH(kode)=:m ORDER BY nama");
   	$query->execute(array(':n'=>$n,':id'=>$_POST['id'],':m'=>$m));
   	$opt="<option value=''>Pilih {$wil}</option>";    
   	while($d = $query->fetchObject()){
@@ -68,5 +79,10 @@ if (!empty($_POST['id'])){
     $r['n']=$n;
   }
 }
+
+if ($r['status']) {
+    $cache->set($cache_key, $r);
+}
+
 header('Content-Type: application/json');
 echo json_encode($r);

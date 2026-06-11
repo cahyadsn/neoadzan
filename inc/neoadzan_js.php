@@ -6,7 +6,7 @@ FILENAME     : neoadzan_js.php
 PURPOSE      : generate js script 
 AUTHOR       : CAHYA DSN
 CREATED DATE : 2018-01-25
-UPDATED DATE : 2026-06-08 13:40:28
+UPDATED DATE : 2026-06-11 15:45:00
 DEMO SITE    : http://neoadzan.cahyadsn.com
 SOURCE CODE  : https://github.com/cahyadsn/neoadzan
 ================================================================================
@@ -26,7 +26,10 @@ See the MIT License for more details
 copyright (c) 2018-2026 by cahya dsn; cahyadsn@gmail.com
 ================================================================================*/
 session_start();
+$expires = 60*60*24*7; // 1 week
 header("Content-type: text/javascript");
+header("Cache-Control: public, max-age=$expires");
+header("Expires: " . gmdate("D, d M Y H:i:s", time() + $expires) . " GMT");
 $c=isset($_SESSION['c'])?$_SESSION['c']:(isset($_GET['c'])?$_GET['c']:'indigo');
 if(isset($_SESSION['author']) && $_SESSION['author']=='cahyadsn'){
 	$v=$_GET['v'];

@@ -7,7 +7,7 @@ FILENAME     : index.php
 PURPOSE      : main page application
 AUTHOR       : CAHYA DSN
 CREATED DATE : 2018-01-25
-UPDATED DATE : 2026-06-08 18:52:46
+UPDATED DATE : 2026-06-11 15:45:00
 DEMO SITE    : http://neoadzan.cahyadsn.com
 SOURCE CODE  : https://github.com/cahyadsn/neoadzan
 ================================================================================*/
@@ -19,10 +19,30 @@ $_SESSION['author']='cahyadsn';
 $_SESSION['ver']=sha1(rand());
 include 'inc/db.php';
 include 'inc/NeoAdzan.php';
-$neoadzan=new NeoAdzan();
-$neoadzan->setLatLng(-6.17501,106.820497);
-$neoadzan->setTimeZone(7);
-$sch=$neoadzan->getSchedule(date('Y'),date('n'));
+include 'inc/Cache.php';
+
+$cache = new Cache();
+$cache_key = 'initial_schedule_' . date('Y-n');
+$cached_data = $cache->get($cache_key);
+
+if ($cached_data) {
+    $sch = $cached_data['sch'];
+    $periode = $cached_data['periode'];
+    $rentang = $cached_data['rentang'];
+    $neoadzan=new NeoAdzan();
+} else {
+    $neoadzan=new NeoAdzan();
+    $neoadzan->setLatLng(-6.17501,106.820497);
+    $neoadzan->setTimeZone(7);
+    $sch=$neoadzan->getSchedule(date('Y'),date('n'));
+    $periode = $neoadzan->periode;
+    $rentang = $neoadzan->rentang;
+    $cache->set($cache_key, [
+        'sch' => $sch,
+        'periode' => $periode,
+        'rentang' => $rentang
+    ]);
+}
 $version='2.0.0';
 $app_name='NeoAdzan!';
 ?>
@@ -39,8 +59,8 @@ $app_name='NeoAdzan!';
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/modern.css?v=<?php echo md5(filemtime('css/modern.css'));?>">
-    <link rel="stylesheet" href="css/neoadzan_css.php?v=<?php echo md5(filemtime('css/neoadzan_css.php'));?>">
+    <link rel="stylesheet" href="css/modern.css?v=<?php echo filemtime('css/modern.css');?>">
+    <link rel="stylesheet" href="css/neoadzan_css.php?v=<?php echo filemtime('css/neoadzan_css.php');?>">
     </head>
     <body>
         <div class="container">
@@ -105,8 +125,8 @@ $app_name='NeoAdzan!';
 
                 <div id="adzan_box">
                     <div class="period-info">
-                        <h2 id='periode'><?php echo $neoadzan->periode;?></h2>
-                        <p id='rentang'><?php echo $neoadzan->rentang;?></p>
+                        <h2 id='periode'><?php echo $periode;?></h2>
+                        <p id='rentang'><?php echo $rentang;?></p>
                     </div>
 
                     <div class="controls">
@@ -178,6 +198,6 @@ $app_name='NeoAdzan!';
             </div>
         </div>
 
-        <script src="inc/neoadzan_js.php?v=<?php echo $_SESSION['ver'];?>"></script>
+        <script src="inc/neoadzan_js.php?v=<?php echo filemtime('inc/neoadzan_js.php');?>"></script>
     </body>
 </html>

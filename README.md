@@ -10,6 +10,7 @@ NeoAdzan is a robust and modern Islamic Prayer Time Schedule application built w
 ## ✨ Features
 
 - **Accurate Calculations**: Supports multiple calculation methods (Depag RI, MWL, ISNA, Egypt, Makkah, Karachi, Tehran, Jafari).
+- **High Performance**: Integrated file-based caching system for near-instant schedule retrieval and reduced server load.
 - **Hijri Calendar**: Integrated Hijri date conversion and display.
 - **Regional Support**: Includes Indonesian regional data (Province & District) based on **Kepmendagri No 300.2.2-2430 Tahun 2025**.
 - **Flexible Schedules**: View daily and monthly prayer schedules.
@@ -20,7 +21,8 @@ NeoAdzan is a robust and modern Islamic Prayer Time Schedule application built w
 ## 🛠 Technology Stack
 
 - **Backend**: PHP 7.4+ (OOP with Traits)
-- **Database**: MySQL / MariaDB (using PDO)
+- **Caching**: Custom file-based caching system
+- **Database**: MySQL / MariaDB (using PDO with query optimization)
 - **Frontend**: Vanilla JavaScript (ES6+), Modern CSS3
 - **Icons**: Font Awesome 4.7
 - **Configuration**: Dotenv support for environment variables
@@ -36,13 +38,8 @@ NeoAdzan is a robust and modern Islamic Prayer Time Schedule application built w
    - Import the database schema from `db/wilayah_level_1_2.sql`.
 3. **Configuration**:
    - Copy `.env.example` to `.env`.
-   - Update the database credentials in the `.env` file:
-     ```env
-     DB_HOST=localhost
-     DB_USER=your_username
-     DB_PASS=your_password
-     DB_NAME=wilayah
-     ```
+   - Update the database credentials in the `.env` file.
+   - Ensure the `cache/` directory is writable by the web server.
 4. **Deploy**: Copy all files to your web server's document root.
 5. **Access**: Navigate to `http://localhost/neoadzan` in your browser.
 
@@ -57,6 +54,10 @@ NeoAdzan provides several API endpoints:
 
 ## 🔄 Recent Updates
 
+- **2026-06-11**: Implemented comprehensive performance optimizations:
+  - Added file-based caching system for API and initial loads.
+  - Optimized database queries and connection handling.
+  - Improved browser caching via optimized asset versioning and HTTP headers.
 - **2026-06-08**: Modernized UI/UX with native modern CSS and Vanilla JS.
 - **2026-06-08**: Updated regional data to Kepmendagri No 300.2.2-2430 Year 2025.
 - **2025-03-01**: Migrated from jQuery to Zepto.min.js (later replaced by Vanilla JS).

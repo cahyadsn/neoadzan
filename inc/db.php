@@ -6,7 +6,7 @@ FILENAME     : db.php
 PURPOSE      : db connection configuraton
 AUTHOR       : CAHYA DSN
 CREATED DATE : 2018-01-25
-UPDATED DATE : 2026-06-08 13:41:03
+UPDATED DATE : 2026-06-11 15:45:00
 DEMO SITE    : http://neoadzan.cahyadsn.com
 SOURCE CODE  : https://github.com/cahyadsn/neoadzan
 ================================================================================
@@ -31,7 +31,8 @@ copyright (c) 2018-2026 by cahya dsn; cahyadsn@gmail.com
  */
 function loadEnv($path)
 {
-    if (!file_exists($path)) {
+    static $loaded = false;
+    if ($loaded || !file_exists($path)) {
         return false;
     }
 
@@ -55,20 +56,28 @@ function loadEnv($path)
             $_SERVER[$name] = $value;
         }
     }
+    $loaded = true;
     return true;
 }
 
 loadEnv(__DIR__ . '/../.env');
 
-$dbhost = getenv('DB_HOST') ?: 'localhost';
-$dbuser = getenv('DB_USER') ?: 'root';
-$dbpass = getenv('DB_PASS') ?: '';
-$dbname = getenv('DB_NAME') ?: 'wilayah';
-$dbtable = getenv('DB_TABLE') ?: 'wilayah_level_1_2';
+$dbhost = $_ENV['DB_HOST'] ?? 'localhost';
+$dbuser = $_ENV['DB_USER'] ?? 'root';
+$dbpass = $_ENV['DB_PASS'] ?? '';
+$dbname = $_ENV['DB_NAME'] ?? 'wilayah';
+$dbtable = $_ENV['DB_TABLE'] ?? 'wilayah_level_1_2';
 
-$db_dsn = "mysql:dbname=$dbname;host=$dbhost";
-try {
-  $db = new PDO($db_dsn, $dbuser, $dbpass);
-} catch (PDOException $e) {
-  echo 'Connection failed: '.$e->getMessage();
+static $db = null;
+if ($db === null) {
+    $db_dsn = "mysql:dbname=$dbname;host=$dbhost;charset=utf8mb4";
+    try {
+      $db = new PDO($db_dsn, $dbuser, $dbpass, [
+          PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+          PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
+          PDO::ATTR_EMULATE_PREPARES => false,
+      ]);
+    } catch (PDOException $e) {
+      die('Connection failed: '.$e->getMessage());
+    }
 }
