@@ -13,7 +13,8 @@ NeoAdzan is a robust and modern Islamic Prayer Time Schedule application built w
 ## ✨ Features
 
 - **Accurate Calculations**: Supports multiple calculation methods (Depag RI, MWL, ISNA, Egypt, Makkah, Karachi, Tehran, Jafari).
-- **Dark/Light Mode**: Integrated theme toggle with persistent user preference.
+- **Dark/Light Mode**: Integrated theme toggle with persistent user preference via cookies.
+- **Theme Color Persistence**: 12 color themes with cookie-based persistence (survives across sessions and browser restarts).
 - **High Performance**: Integrated file-based caching system for near-instant schedule retrieval and reduced server load.
 - **Hijri Calendar**: Integrated Hijri date conversion and display.
 - **Regional Support**: Includes Indonesian regional data (Province & District) based on **Kepmendagri No 300.2.2-2430 Tahun 2025**.
@@ -58,6 +59,12 @@ NeoAdzan provides several API endpoints:
 
 ## 🔄 Recent Updates
 
+- **2026-07-02**: Added cookie-based persistence for theme preferences:
+  - Theme color and dark/light mode now persist via cookies (`neoadzan_theme`, `neoadzan_mode`) with 1-year expiry.
+  - Preferences survive session expiry, browser restarts, and device reboots.
+  - Server-side rendering of `data-mode` attribute eliminates flash of wrong theme on page load.
+  - Replaced `localStorage`-based mode persistence with unified cookie approach.
+  - Added whitelist validation for color and mode values.
 - **2026-06-11**: Implemented comprehensive performance optimizations and new features:
   - Added file-based caching system for API and initial loads.
   - Optimized database queries and connection handling.

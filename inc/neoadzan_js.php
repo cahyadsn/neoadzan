@@ -64,19 +64,36 @@ function post(url, data) {
     }).then(response => response.json());
 }
 
+// Cookie helper functions
+function setCookie(name, value, days) {
+    var d = new Date();
+    d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+    document.cookie = name + '=' + encodeURIComponent(value) +
+        ';expires=' + d.toUTCString() +
+        ';path=/;SameSite=Lax';
+}
+
+function getCookie(name) {
+    var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    return match ? decodeURIComponent(match[2]) : null;
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     var themeToggle = document.getElementById('themeToggle');
     var html = document.documentElement;
-    var currentMode = localStorage.getItem('mode') || 'light';
-    
+
+    // Dark/light mode: use server-rendered data-mode attribute (already set from cookie/session)
+    var currentMode = html.getAttribute('data-mode') || getCookie('neoadzan_mode') || 'light';
     html.setAttribute('data-mode', currentMode);
+
     if (themeToggle) {
         themeToggle.querySelector('i').className = currentMode === 'dark' ? 'fa fa-sun-o' : 'fa fa-moon-o';
-        
+
         themeToggle.addEventListener('click', function() {
             var mode = html.getAttribute('data-mode') === 'dark' ? 'light' : 'dark';
             html.setAttribute('data-mode', mode);
-            localStorage.setItem('mode', mode);
+            setCookie('neoadzan_mode', mode, 365);
+            post('inc/change.color.php', { 'mode': mode });
             this.querySelector('i').className = mode === 'dark' ? 'fa fa-sun-o' : 'fa fa-moon-o';
         });
     }
@@ -86,6 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             var a = this.getAttribute('data-value');
             document.documentElement.setAttribute('data-theme', a);
+            setCookie('neoadzan_theme', a, 365);
             post('inc/change.color.php', { 'color': a });
         });
     });

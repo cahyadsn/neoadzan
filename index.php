@@ -12,9 +12,38 @@ DEMO SITE    : http://neoadzan.cahyadsn.com
 SOURCE CODE  : https://github.com/cahyadsn/neoadzan
 ================================================================================*/
 session_start();
-$c=isset($_SESSION['c'])?$_SESSION['c']:(isset($_GET['c'])?$_GET['c']:'indigo');
+
+// Theme color: session > cookie > GET > default
+$c = isset($_SESSION['c']) ? $_SESSION['c']
+   : (isset($_COOKIE['neoadzan_theme']) ? $_COOKIE['neoadzan_theme']
+   : (isset($_GET['c']) ? $_GET['c'] : 'indigo'));
+
+// Dark/light mode: session > cookie > default
+$mode = isset($_SESSION['mode']) ? $_SESSION['mode']
+      : (isset($_COOKIE['neoadzan_mode']) ? $_COOKIE['neoadzan_mode'] : 'light');
+
+// Whitelist validation
+$allowed_colors = ['black','brown','pink','orange','amber','lime','green','teal','purple','indigo','blue','cyan'];
+$allowed_modes  = ['light','dark'];
+if (!in_array($c, $allowed_colors)) $c = 'indigo';
+if (!in_array($mode, $allowed_modes)) $mode = 'light';
+
+// Sync to session
+$_SESSION['c'] = $c;
+$_SESSION['mode'] = $mode;
+
+// Sync to cookie (1 year expiry)
+$cookie_opts = [
+    'expires'  => time() + 60*60*24*365,
+    'path'     => '/',
+    'secure'   => false,
+    'httponly'  => false,
+    'samesite'  => 'Lax'
+];
+setcookie('neoadzan_theme', $c, $cookie_opts);
+setcookie('neoadzan_mode', $mode, $cookie_opts);
+
 define("_AUTHOR","cahyadsn");
-$_SESSION['c']=$c;
 $_SESSION['author']='cahyadsn';
 $_SESSION['ver']=sha1(rand());
 include 'inc/db.php';
@@ -47,7 +76,7 @@ $version='2.0.0';
 $app_name='NeoAdzan!';
 ?>
 <!DOCTYPE html>
-<html lang='en' data-theme="<?php echo $c;?>">
+<html lang='en' data-theme="<?php echo $c;?>" data-mode="<?php echo $mode;?>">
     <head>
     <title><?php echo "{$app_name} v {$version}";?></title>
     <meta charset="utf-8" />
