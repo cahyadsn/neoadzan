@@ -59,6 +59,9 @@ NeoAdzan provides several API endpoints:
 
 ## 🔄 Recent Updates
 
+- **2026-07-20**: Implemented further performance optimizations:
+  - Cached the database queries for provinces and default districts on the initial page load of `index.php` using the file-based cache (30-day TTL).
+  - Updated API endpoints `api/getDaily.php` and `api/getMonthly.php` to support both `GET` and `POST` requests, utilizing request-specific parameters to construct robust, non-colliding cache keys.
 - **2026-07-02**: Added cookie-based persistence for theme preferences:
   - Theme color and dark/light mode now persist via cookies (`neoadzan_theme`, `neoadzan_mode`) with 1-year expiry.
   - Preferences survive session expiry, browser restarts, and device reboots.

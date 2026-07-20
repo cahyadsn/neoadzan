@@ -30,7 +30,8 @@ include "../inc/NeoAdzan.php";
 include "../inc/Cache.php";
 
 $cache = new Cache();
-$cache_key = 'daily_' . serialize($_POST);
+$params = !empty($_POST) ? $_POST : $_GET;
+$cache_key = 'daily_' . serialize($params);
 $cached_result = $cache->get($cache_key);
 
 if ($cached_result) {
@@ -40,17 +41,17 @@ if ($cached_result) {
 }
 
 $r=array('status'=>false,'error'=>'an error occured');
-$y=(isset($_POST['y']) && !empty($_POST['y']))?$_POST['y']:date('Y');
-$m=(isset($_POST['m']) && !empty($_POST['m']))?$_POST['m']:date('n');
-$day=(isset($_POST['d']) && !empty($_POST['d']))?$_POST['d']:date('j');
-if(!empty($_POST['lat'])){
-	$lat=$_POST['lat'];
-	$lng=$_POST['lng'];
-	$tz=(isset($_POST['tz']) && !empty($_POST['tz']))?$_POST['tz']:floor($_POST['lng']/15);
+$y=(isset($params['y']) && !empty($params['y']))?$params['y']:date('Y');
+$m=(isset($params['m']) && !empty($params['m']))?$params['m']:date('n');
+$day=(isset($params['d']) && !empty($params['d']))?$params['d']:date('j');
+if(!empty($params['lat'])){
+	$lat=$params['lat'];
+	$lng=$params['lng'];
+	$tz=(isset($params['tz']) && !empty($params['tz']))?$params['tz']:floor($params['lng']/15);
 }
-if (!empty($_POST['id'])){
+if (!empty($params['id'])){
   $query = $db->prepare("SELECT lat, lng, tz FROM {$dbtable} WHERE kode=:id");
-  $query->execute(array(':id'=>$_POST['id']));
+  $query->execute(array(':id'=>$params['id']));
   $d = $query->fetchObject();
   if(empty($d) || empty($d->lat)){
     $r=array('status'=>false,'error'=>'data not found');

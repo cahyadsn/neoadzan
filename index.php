@@ -132,10 +132,19 @@ $app_name='NeoAdzan!';
                         <select name="prop" id="prop" class="slcProv">
                             <option value="">Pilih Provinsi</option>
                             <?php
-                            $query=$db->prepare("SELECT kode,nama FROM {$dbtable} WHERE CHAR_LENGTH(kode)=2 ORDER BY nama");
-                            $query->execute();
-                            while ($data=$query->fetchObject()){
-                                echo '<option value="'.$data->kode.'"'.($data->kode=='31'?' selected':'').'>'.$data->nama.'</option>';
+                            $prov_cache_key = 'index_provinces';
+                            $provinces = $cache->get($prov_cache_key, 2592000); // 30 days
+                            if (!$provinces) {
+                                $provinces = [];
+                                $query=$db->prepare("SELECT kode,nama FROM {$dbtable} WHERE CHAR_LENGTH(kode)=2 ORDER BY nama");
+                                $query->execute();
+                                while ($data=$query->fetchObject()){
+                                    $provinces[] = ['kode' => $data->kode, 'nama' => $data->nama];
+                                }
+                                $cache->set($prov_cache_key, $provinces);
+                            }
+                            foreach ($provinces as $prov) {
+                                echo '<option value="'.$prov['kode'].'"'.($prov['kode']=='31'?' selected':'').'>'.$prov['nama'].'</option>';
                             }
                             ?>
                         </select>
@@ -145,10 +154,19 @@ $app_name='NeoAdzan!';
                         <select name="kota" id="kota" class="slcKab">
                             <option value="">Pilih Kota</option>
                             <?php
-                            $query=$db->prepare("SELECT kode,nama FROM {$dbtable} WHERE CHAR_LENGTH(kode)=5 AND kode LIKE '31.%' ORDER BY nama");
-                            $query->execute();
-                            while ($data=$query->fetchObject()){
-                                echo '<option value="'.$data->kode.'"'.($data->kode=='31.71'?' selected':'').'>'.$data->nama.'</option>';
+                            $dist_cache_key = 'index_districts_31';
+                            $districts = $cache->get($dist_cache_key, 2592000); // 30 days
+                            if (!$districts) {
+                                $districts = [];
+                                $query=$db->prepare("SELECT kode,nama FROM {$dbtable} WHERE CHAR_LENGTH(kode)=5 AND kode LIKE '31.%' ORDER BY nama");
+                                $query->execute();
+                                while ($data=$query->fetchObject()){
+                                    $districts[] = ['kode' => $data->kode, 'nama' => $data->nama];
+                                }
+                                $cache->set($dist_cache_key, $districts);
+                            }
+                            foreach ($districts as $dist) {
+                                echo '<option value="'.$dist['kode'].'"'.($dist['kode']=='31.71'?' selected':'').'>'.$dist['nama'].'</option>';
                             }
                             ?>
                         </select>
